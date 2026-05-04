@@ -1,0 +1,62 @@
+# Example ms-swift GRPO config with EleRPO (Element Relative Policy Optimization).
+#
+# This shows the key CLI arguments for enabling EleRPO.
+# Add these to your ms-swift GRPO training command or YAML config.
+
+# --- Standard GRPO arguments ---
+rlhf_type: grpo
+model: Qwen/Qwen3-VL-2B-Instruct
+train_type: lora
+lora_rank: 32
+lora_alpha: 64
+num_generations: 16
+temperature: 0.7
+top_p: 0.9
+top_k: 20
+max_completion_length: 4096
+
+# --- Reward functions ---
+# Two separate reward functions for visual and text elements.
+# Each computes Hungarian IoU F1 on its respective element type.
+reward_funcs: box_iou_visual_hungarian box_iou_text_hungarian
+reward_weights: 0.5 0.5
+
+# --- Advantage estimator ---
+# GDPO normalizes each reward function separately within groups
+# before combining, preserving distinct advantage signals.
+advantage_estimator: gdpo
+
+# --- EleRPO: element-level per-token advantages ---
+stepwise_training: true
+slicing_strategy: hungarian
+stepwise_use_iou_reward: true
+stepwise_check_labels: true
+stepwise_include_delimiter: true
+
+# Delta-F1 prefix-conditioned advantage with silhouette clustering.
+# At each position k, rollouts are clustered by prefix F1(k-1),
+# and the cluster-conditional mean is subtracted to reduce variance.
+stepwise_norm_mode: delta_f1_cond_prefix
+
+# Type-separated weights for delta-F1 computation.
+stepwise_delta_f1_weights: 0.5 0.5
+
+# Silhouette clustering parameters.
+# n_clusters: max clusters to try (2..n_clusters).
+# min_silhouette: minimum silhouette score; below this, no clustering.
+stepwise_n_clusters: 4
+stepwise_min_silhouette: 0.9
+
+# Hybrid combination: average of sequence-level and element-level advantages.
+# final_advantage[t] = 0.5 * seq_advantage + 0.5 * box_advantage[t]
+stepwise_hybrid_mode: average
+
+# --- Training hyperparameters ---
+beta: 0.04
+learning_rate: 5e-7
+warmup_ratio: 0.01
+per_device_train_batch_size: 2
+max_steps: 5000
+save_steps: 100
+eval_steps: 500
+logging_steps: 5
