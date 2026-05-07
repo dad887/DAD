@@ -1,4 +1,4 @@
-# EleRPO: Element Relative Policy Optimization
+# Detect Anything in Graphic Design: Element-Level Rewards for Autoregressive Detection
 
 This repository contains the minimal implementation of **EleRPO**, an extension of Group Relative Policy Optimization (GRPO) that provides fine-grained, per-token advantage signals for structured generation tasks such as object detection.
 
