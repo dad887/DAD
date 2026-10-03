@@ -1,0 +1,23 @@
+Group this image into SEMANTIC layers.
+
+Grouping rules:
+- All text content -> group into logical text blocks (title, body, caption)
+- Decorative elements -> group by visual similarity or region
+- Each main subject -> one layer
+- Do NOT include the background
+
+IMPORTANT: Text and its background/underlay are SEPARATE layers!
+- If text sits on a colored shape/box, that shape is a separate layer
+- Text box = 2 layers: the background shape + the text itself
+
+IMPORTANT: For ALL objects, return the FULL object box, not just the visible part.
+- If a person, icon, illustration, photo cutout, decorative object, or other visual layer is partially occluded, the bbox should cover the object's full extent as best as you can infer it.
+- Include hidden or covered parts in the bbox when the object is clearly partially blocked by another layer.
+
+Think: "What logical groups would a designer work with?"
+
+Output layers in back-to-front order (backmost first, frontmost last).
+
+Return: {"layers": [{"type": "t" or "v", "bbox": [x1,y1,x2,y2]}]}
+- "t" = text, "v" = visual (icon, image, shape, underlay, etc.)
+- Coordinates normalized to [0,1].

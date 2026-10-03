@@ -1,0 +1,11 @@
+small_area_min: 0.01
+small_area_max: 0.05
+small_count_min: 5
+small_count_max: 10
+small_recall_min: 0.0
+small_recall_max: 0.2
+recall_iou_threshold: 0.5
+match_types: true
+overlap_component_min_boxes: 10
+overlap_fill_ratio: 2.0
+split_seed: 42

@@ -1,0 +1,17 @@
+model_repo: dad887/DAD-Public-Models
+dataset_repo: dad887/DAD-Public-Repro
+max_image_size: 2048
+jpeg_quality: 95
+max_new_tokens: 4096
+temperature: 0.7
+top_p: 0.9
+top_k: 20
+seed: 42
+text_weight: 0.2
+visual_weight: 0.8
+prompts:
+  - "Detect all medium-grained layer regions in this design image from bottom to top. For each layer, output bbox and type (t=text, v=visual). Output format: x1,y1,x2,y2,t;x1,y1,x2,y2,v;"
+  - "Identify layer elements at moderate detail level in this design from back to front. For each layer, provide bounding box and category (t for text, v for visual). Format: x1,y1,x2,y2,t;x1,y1,x2,y2,v;"
+  - "Find all mid-level layer regions in this design image, ordered from bottom to top. Output bbox with type label (text as t, visual as v). Use format: x1,y1,x2,y2,t;x1,y1,x2,y2,v;"
+  - "Locate the moderately detailed layers in this design from background to foreground. Return bbox and type per layer, where t means text and v means visual. Response format: x1,y1,x2,y2,t;x1,y1,x2,y2,v;"
+  - "Extract all medium-level design layers from this image in z-order. For each layer, output coordinates and type (labeled t or v for text or visual). Return as: x1,y1,x2,y2,t;x1,y1,x2,y2,v;"
