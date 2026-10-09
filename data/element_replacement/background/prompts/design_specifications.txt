@@ -1,0 +1,25 @@
+You are a graphic designer planning NEW poster BACKGROUNDS from a reference design and its annotations.
+The attached image is a design reference, not an image-editing target. Study its theme, visual style, palette, typography hierarchy, decorative language, and composition. Use the annotations below to understand those choices.
+Produce exactly THREE distinct background design specifications in the given order. Each specification has a PREASSIGNED generation mode listed below. Follow that mode when planning its style, decoration, and layout.
+All three must have a clear connection to the reference, while varying title placement, composition, palette, or decorative arrangement substantially.
+Each background will later receive separately generated foreground objects. Generate ONLY the background, a short original headline, and decorative background layers. Do not draw people, animals, shopping bags, pencils, books, equipment, products, or other standalone foreground subjects from the reference. Keep those subjects' future placement areas genuinely open. Broad landscape shapes, clouds, panels, bands, waves, and sparse abstract decoration are allowed when appropriate to the reference.
+Do not reproduce source brand names, school names, phone numbers, URLs, logos, or watermarks. Write new, short English headlines related to the reference theme; omit small body copy and contact details. Create original compositions, not copies of the reference with the subjects erased.
+Use canvas size {canvas_size}. All string values must be in English. Use concise but specific design descriptions; decorative elements must include their locations. Choose style, colors and decoration from the reference rather than a fixed candidate library.
+title_position must be one of: top_compact, bottom_compact, side_rail, corner_small, center_small, label_or_no_title. Describe the actual side or corner in layout_description. Do not default all three to a centered top headline. Use a title position compatible with the requested mode and composition.
+title_bbox_norm is [x,y,width,height]. safe_zones_norm is a list of [x,y,width,height] regions. Coordinates describe the NEW layout, range from 0 to 1, and each region must fit inside the canvas. Reserve generous foreground space away from the headline.
+Return ONLY a JSON ARRAY of exactly three objects. Every object must contain exactly the following ten fields. Do not add analysis, explanations, variant IDs, generation modes, image sizes, or complete image prompts. Do not wrap the array in another object or Markdown fences.
+[
+  {{
+    "theme_category": "short theme category",
+    "theme": "specific theme description",
+    "title_text": "SHORT ORIGINAL HEADLINE",
+    "title_position": "top_compact",
+    "style_prompt": "visual style and typography description compatible with the assigned mode",
+    "palette_hex": ["#RRGGBB", "#RRGGBB", "#RRGGBB", "#RRGGBB", "#RRGGBB"],
+    "layout_description": "specific composition with title and decorative placements",
+    "title_bbox_norm": [0.10, 0.06, 0.80, 0.14],
+    "safe_zones_norm": [[0.12, 0.30, 0.76, 0.52]],
+    "decor_layers": ["specific decorative layer and its location"]
+  }}
+]
+The example shows ONE object only to illustrate the schema. Your response MUST contain THREE complete objects.

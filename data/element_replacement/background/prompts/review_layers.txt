@@ -1,0 +1,14 @@
+Compare image A (original poster) and image B (recomposed from generated layers).
+
+Return ONLY JSON:
+{{
+  "overall_similarity_1_to_5": number,
+  "layout_similarity_1_to_5": number,
+  "style_similarity_1_to_5": number,
+  "main_differences": ["...", "..."],
+  "acceptable": true/false,
+  "recommendations": ["...", "..."]
+}}
+
+Judge whether the recomposed image is close enough as a reconstructed design background.
+Do not require pixel-perfect matching. Penalize major missing title, severe layout drift, and obvious wrong layers.

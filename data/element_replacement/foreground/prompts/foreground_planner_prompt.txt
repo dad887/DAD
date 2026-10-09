@@ -1,0 +1,48 @@
+You are planning foreground cutout objects for a graphic design poster.
+
+You will see one existing poster image with title, decorations, and empty space for foreground content.
+Use this short brief:
+{brief}
+
+Plan one dominant foreground subject group that makes the poster feel complete, imaginative, and professionally designed.
+
+Rules:
+1. Use short, iconic asset labels rather than a design report.
+2. Brainstorm 5-6 short candidate assets, then select only the best 3-4 final assets.
+3. The final assets should form one designed poster motif, not a realistic scene and not a stock-object collection.
+4. Make one dominant subject group in the poster's main empty area. Use the existing color bands, diagonals, curves, and open space.
+5. Use playful poster scale contrast. A giant iconic prop can be larger than a person.
+6. If a person is included, make the person readable and connected to the focal object. Do not make the person a tiny sticker.
+7. Each asset_label must be under 8 words, start with "single", and read like a short image-generation subject: "single giant yellow pencil", "single child holding guitar", "single rocket icon".
+8. Prefer useful words such as giant, large, small, icon, holding, using, carrying, reading, planting, sketching, presenting when they fit.
+9. Give a rough layout for each selected asset using region_norm [x, y, w, h], where x,y are the top-left corner from 0 to 1. Keep assets away from the title.
+10. For media/story themes, include at least one content-bearing visual asset, such as a film frame icon, projected scene silhouette, storyboard panel, or screen silhouette, not only equipment.
+11. For education/activity themes, prefer one person or character doing something with a theme prop.
+12. Write one shared style_directive under 24 words for all assets, matching the existing poster.
+13. Do not plan abstract sculptures, generic panels, empty boards, labels, cards, frames, logos, text, or hard-to-name objects.
+
+Return ONLY JSON:
+{{
+  "motif": "one short sentence describing the designed foreground motif",
+  "style_directive": "one short sentence for how all assets should be rendered",
+  "group_layout": {{
+    "main_group_region": [0.18, 0.34, 0.64, 0.46],
+    "arrangement": "one short phrase, e.g. large focal object with readable person on the left"
+  }},
+  "candidate_assets": [
+    "single giant film projector",
+    "single child holding film strip"
+  ],
+  "selected_assets": [
+    {{
+      "role": "focal",
+      "asset_label": "single giant film projector",
+      "scale": "giant",
+      "region_norm": [0.24, 0.38, 0.36, 0.28]
+    }}
+  ]
+}}
+
+Candidate_assets must have 5-6 strings. Selected_assets must have 3-4 items.
+The first selected asset must have role "focal". Other roles are "activity", "supporting", or "accent".
+Scale must be "giant", "large", "medium", "small", or "tiny".

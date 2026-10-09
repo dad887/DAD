@@ -23,12 +23,14 @@ Graphic designs, such as posters, advertisements, and infographics, are an impor
 | [elerpo](elerpo/README.md) | Element-level reward and advantage implementation, with integration examples |
 | [data/annotation](data/annotation/README.md) | Appendix B prompt and model-calling script |
 | [data/filtering](data/filtering/README.md) | Small-element selection and over-splitting filter |
-| `data/element_replacement` | Reserved directory for the element-replacement pipeline |
+| [data/element_replacement](data/element_replacement/README.md) | Reference-driven layered design synthesis, with image, layer, and annotation export |
 | [inference](inference/README.md) | Model loading, prediction, data download, and evaluation |
 
 ## Dataset
 
 The [DAD dataset repository](https://huggingface.co/datasets/dad887/DAD) contains composited images, individual layer assets, and aligned annotations for graphic-design detection and image-to-layer decomposition. Its dataset card describes the subsets, file layout, annotation schema, and loading instructions.
+
+The [layered design synthesis pipeline](data/element_replacement/README.md) generates new backgrounds and foreground elements from reference designs, composes them into layered images, and exports amodal boxes, visible boxes, and individual layers. Its installation and usage instructions are provided in the pipeline directory.
 
 ## Public-data experiment
 

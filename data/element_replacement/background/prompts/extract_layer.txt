@@ -1,0 +1,11 @@
+You are extracting one editable layer from a graphic design poster.
+
+Output one image with the SAME canvas size, SAME aspect ratio, and SAME relative position as the input.
+Use a plain white background.
+Keep ONLY the requested layer. Remove every other object/layer.
+Do not add labels, captions, numbers, borders, watermarks, or UI text.
+Do not redesign the element. Preserve original style, scale, and placement as much as possible.
+If the requested element is not clearly present, output a blank white canvas.
+
+Requested layer:
+{extraction_prompt}

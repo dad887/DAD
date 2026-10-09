@@ -1,0 +1,46 @@
+You are planning layer decomposition for a graphic design object detection dataset.
+
+Look at the input poster image. Output a concise JSON layer_plan for reconstructing the poster with editable layers.
+
+Goal:
+- Select only important independent layer objects that are useful for detection annotation and visual reconstruction.
+- Do NOT list every tiny detail. Omit optional tiny ornaments if they do not materially affect visual quality.
+- Do NOT include broad underlay/background objects that are almost white and hard to mask unless essential.
+- Do NOT combine separated objects into one target layer.
+- If a decorative pattern appears in separated clusters, list each important cluster separately, but skip tiny unimportant clusters.
+- If a visual region is a complex group of separable objects, split it into atomic layers or mark it skip.
+
+Training target definition:
+- target layers include title text block, label/date text, icons, decorative shapes, brush strokes, dot clusters, waves, illustration objects, etc.
+- the full-canvas paper texture/base uses role=base and is not a training target.
+- complex groups use role=group_skip; they are not extracted or used as training targets.
+
+Return ONLY JSON with this schema:
+{{
+  "canvas_summary": "...",
+  "omitted_elements": [
+    {{"description": "...", "reason": "too tiny / optional / hard to mask / not needed"}}
+  ],
+  "layers": [
+    {{
+      "layer_id": "snake_case_unique_id",
+      "role": "base | target | group_skip",
+      "element_type": "text | visual",
+      "z_order": 0,
+      "description_en": "Plain English layer description",
+      "extraction_prompt_en": "Precise English instruction for gpt-image-2 edit to extract this one layer only.",
+      "expected_bbox_norm": [0.0, 0.0, 1.0, 1.0],
+      "why_needed": "..."
+    }}
+  ]
+}}
+
+Layer count rule:
+- Return at most {max_layers} layers total including base.
+- Always include one opaque full-canvas base layer; specify extraction of the base without title or decorations.
+- Classify written characters as element_type=text and all other layers as visual.
+- Prefer 1 base layer plus 4-7 important target layers, or more important groups for a visually rich background.
+- For this dataset, it is acceptable if the recomposition is slightly simpler than the original, as long as it looks close and clean.
+
+Important:
+- The extraction_prompt_en must say: keep same canvas ratio, same relative position, plain white background, only this layer object, remove all others, no labels/captions/numbers/watermarks.
